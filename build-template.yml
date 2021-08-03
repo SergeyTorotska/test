@@ -1,0 +1,17 @@
+stages:
+- stage: Restore, Build, Test(unit)
+  jobs:
+  - job: BuildJob
+    steps:
+    - task: DotNetCoreCLI@2
+      displayName: 'dotnet restore'
+      inputs:
+        command: 'restore'
+        projects: '**/*.sln'
+        feedsToUse: 'select'
+        vstsFeed: '255f8b5e-0d73-4208-a824-b04c39407d41'
+    - task: DotNetCoreCLI@2
+      displayName: 'dotnet build'
+      inputs:
+        projects: '**/*.sln' 
+        arguments: '--configuration Release'  
